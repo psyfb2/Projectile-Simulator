@@ -99,8 +99,9 @@ def settings_menu(window, colour, live_data_button, ball_colour_button, trajecto
     mechanics.display_text("g=9.8",10,(WIDTH-120, 310), window)
     mechanics.display_text("g=3.711",10,(WIDTH-60, 310), window)
 
-def save_menu(window, colour, (x,y), initial_speed, angle, height, save_button2, text_box):
+def save_menu(window, colour, xy, initial_speed, angle, height, save_button2, text_box):
     """Subroutine to display save menu"""
+    x, y = xy
     pygame.draw.rect(window, colour, save_menu_rect)
     # draw the text
     mechanics.display_text("NAME : ",15,((WIDTH/2)-125, (HEIGHT/2)-100), window)
@@ -112,8 +113,9 @@ def save_menu(window, colour, (x,y), initial_speed, angle, height, save_button2,
     save_button2.display()
     text_box.display()
 
-def load_menu(window, colour, (x,y), load_button2, text_box):
+def load_menu(window, colour, xy, load_button2, text_box):
     """Subroutine to display load menu"""
+    x, y = xy
     pygame.draw.rect(window, colour, save_menu_rect)
     # draw the text
     mechanics.display_text("NAME : ",15,((WIDTH/2)-125, (HEIGHT/2)-100), window)
@@ -208,8 +210,10 @@ def add_to_leaderboard(file_name, name, score):
             remove_lowest_score(leaderboard) # remove last item
             insert_line(leaderboard, line_num, str(score)+" "+str(name)+"\n") # insert the new score in the leaderboard
 
-def game_over(window, colour, try_again_button, text_box, save_button, (x, y), saved):
+
+def game_over(window, colour, try_again_button, text_box, save_button, xy, saved):
     """Subroutine to display game over message and leaderboard"""
+    x, y = xy
     pygame.draw.rect(window, colour, [(WIDTH/2)-250, (HEIGHT/2)-200, 500, 400])
     pygame.draw.line(window, (0, 0, 0), ((WIDTH/2)-250, (HEIGHT/2)-170), ((WIDTH/2)+250, (HEIGHT/2)-170))
     pygame.draw.line(window, (160, 200, 120), ((WIDTH/2)-250, (HEIGHT/2)-120), ((WIDTH/2)-50, (HEIGHT/2)-120), 3)
@@ -225,8 +229,9 @@ def game_over(window, colour, try_again_button, text_box, save_button, (x, y), s
     mechanics.display_text("SCORE",15,((WIDTH/2)-100, (HEIGHT/2)-140), window, False)
     load_leaderboard(window, leaderboard)
 
-def help_box((x, y), text, colour, width=225, height=40):
+def help_box(xy, text, colour, width=225, height=40):
     """Subroutine to display help box, input text as a list with each list element representing one line of text"""
+    x, y = xy
     pygame.draw.rect(window, colour, (x, y+20, width, height))
     i = 0
     for line in text:
